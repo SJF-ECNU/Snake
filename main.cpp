@@ -162,14 +162,6 @@ public:
 
 		cleardevice();//清屏
 
-		snake.draw();//蛇绘制
-		food.draw();//食物绘制
-		if (snake.ifOut()||snake.SelfCollision())//判断蛇是否碰撞
-		{
-			ifSurvie = 0;
-			std::cout << "Your Score Is " << snake.getLength()-3 << std::endl;
-		}
-
 		ifSnakeEateFood();//判断是否吃到食物
 
 		EndBatchDraw();//双缓冲绘图以防止频闪 end
