@@ -4,6 +4,7 @@
 #include<ctime>
 
 int ifSurvie;//蛇是否存活
+int speed;//蛇的速度
 
 class Sprite
 {
@@ -161,6 +162,13 @@ public:
 		BeginBatchDraw();//双缓冲绘图以防止频闪 begin
 
 		cleardevice();//清屏
+		snake.draw();
+		food.draw();
+		if (snake.ifOut() || snake.SelfCollision())
+		{
+			ifSurvie = 0;
+			std::cout << "Game over! Your score is " << snake.getLength() - 3 << "." << std::endl;
+		}
 
 		ifSnakeEateFood();//判断是否吃到食物
 
@@ -212,6 +220,7 @@ public:
 		{
 			snake.increment();
 			food.changeLoc();
+			if (speed < 99) speed++;
 		}
 	}
 
@@ -223,6 +232,7 @@ private:
 int main()
 {
 	ifSurvie = 1;
+	speed = 0;
 
 	initgraph(640, 480,EX_SHOWCONSOLE);//画板
 
@@ -236,7 +246,7 @@ int main()
 			break;
 		system("cls");
 		scene.run();
-		Sleep(100);
+		Sleep(100-speed);
 	}
 
 	getchar();
